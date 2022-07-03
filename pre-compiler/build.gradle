@@ -5,6 +5,32 @@ plugins {
 group 'com.jvmfrog.precompiler'
 version '1.0'
 
+
+project.ext.mainClassName = "com.jvmfrog.precompiler.Main"
+
+task compileJson(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task buildJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': project.mainClassName
+    }
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
+
+task copyJarToBin(type: Copy) {
+    from buildJar
+    into 'jar'
+}
+
+task dist (dependsOn: [copyJarToBin])
+
 repositories {
     mavenCentral()
 }
