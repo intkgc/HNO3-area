@@ -8,5 +8,6 @@ public class Player extends Entity {
         add(new PositionComponent());
         add(new RenderComponent());
         add(new VelocityComponent());
+
     }
 }
