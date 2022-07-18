@@ -22,7 +22,7 @@ public class MapParserTest {
             "    1 2 1\n" +
             "    1 1 1";
 
-    int[][] map = new int[][]{
+    byte[][] map = new byte[][]{
             {2, 2, 2},
             {1, 2, 1},
             {1, 1, 1}
