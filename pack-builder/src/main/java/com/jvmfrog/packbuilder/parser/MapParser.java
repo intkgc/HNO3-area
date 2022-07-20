@@ -1,4 +1,4 @@
-package com.jvmfrog.precompiler.parser;
+package com.jvmfrog.packbuilder.parser;
 
 import java.util.HashMap;
 import java.util.LinkedList;

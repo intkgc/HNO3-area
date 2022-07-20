@@ -2,11 +2,11 @@ plugins {
     id 'java'
 }
 
-group 'com.jvmfrog.precompiler'
+group 'com.jvmfrog.packbuilder'
 version '1.0'
 
 
-project.ext.mainClassName = "com.jvmfrog.precompiler.Main"
+project.ext.mainClassName = "com.jvmfrog.packbuilder.Main"
 
 task compileJson(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName

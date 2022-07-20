@@ -4,7 +4,7 @@ sourceCompatibility = 11
 sourceSets.main.java.srcDirs = ["src/"]
 
 task runJar(dependsOn: jar) {
-    String jarPath = rootProject.projectDir.path + "/pre-compiler/jar/pre-compiler-1.0.jar"
+    String jarPath = rootProject.projectDir.path + "/pack-builder/jar/pack-builder-1.0.jar"
     String coreDataPath = rootProject.projectDir.path + "/core/data"
     String assetsPath = rootProject.projectDir.path + "/android/assets"
     javaexec {

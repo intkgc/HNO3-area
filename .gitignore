@@ -19,7 +19,7 @@ www-test/
 
 gradle/
 
-/pre-compiler/build/
+/pack-builder/build/
 
 ## Android Studio and Intellij and Android in general
 /android/libs/armeabi/
