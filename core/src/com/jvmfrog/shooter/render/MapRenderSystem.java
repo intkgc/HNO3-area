@@ -1,26 +1,32 @@
 package com.jvmfrog.shooter.render;
 
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.jvmfrog.shooter.entity.Player;
+import com.jvmfrog.shooter.entity.PositionComponent;
 import com.jvmfrog.shooter.world.World;
 
 
-public class Render {
+public class MapRenderSystem extends EntitySystem {
     private World world;
-    private Player player;
+    private PositionComponent playerPosition;
     private SpriteBatch batch;
     private OrthographicCamera camera;
 
-    public void update(World world, Player player) {
+    public void init(World world, PositionComponent player) {
         this.world = world;
-        this.player = player;
+        this.playerPosition = player;
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
-    public void render() {
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+    }
 
+    public SpriteBatch getBatch() {
+        return batch;
     }
 }

@@ -3,9 +3,9 @@ package com.jvmfrog.shooter.render;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.jvmfrog.shooter.entity.EntitySystem;
 import com.jvmfrog.shooter.entity.PositionComponent;
 import com.jvmfrog.shooter.entity.RenderComponent;
 
@@ -24,11 +24,6 @@ public class EntityRenderSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         entities = engine.getEntities();
-    }
-
-    @Override
-    public void removedFromEngine(Engine engine) {
-
     }
 
     @Override
