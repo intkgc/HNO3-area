@@ -1,4 +1,4 @@
-package com.jvmfrog.precompiler.parser;
+package com.jvmfrog.packbuilder.parser;
 
 public class DataSection extends Section {
     public int width;

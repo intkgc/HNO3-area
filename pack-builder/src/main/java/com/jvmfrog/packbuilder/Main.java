@@ -1,11 +1,11 @@
-package com.jvmfrog.precompiler;
+package com.jvmfrog.packbuilder;
 
 import com.intbyte.bdb.DataBuffer;
 import com.intbyte.bdb.provider.HashKeyProvider;
-import com.jvmfrog.precompiler.parser.DataSection;
-import com.jvmfrog.precompiler.parser.MapParser;
-import com.jvmfrog.precompiler.parser.MapSection;
-import com.jvmfrog.precompiler.parser.Section;
+import com.jvmfrog.packbuilder.parser.DataSection;
+import com.jvmfrog.packbuilder.parser.MapParser;
+import com.jvmfrog.packbuilder.parser.MapSection;
+import com.jvmfrog.packbuilder.parser.Section;
 
 import java.io.File;
 import java.io.FileOutputStream;

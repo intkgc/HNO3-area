@@ -1,4 +1,4 @@
-package com.jvmfrog.precompiler.parser;
+package com.jvmfrog.packbuilder.parser;
 
 public class MapSection extends Section {
     public byte[][] map;
