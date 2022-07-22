@@ -3,7 +3,7 @@ sourceCompatibility = 11
 
 sourceSets.main.java.srcDirs = ["src/"]
 
-task runJar(dependsOn: jar) {
+/*task runJar(dependsOn: jar) {
     String jarPath = rootProject.projectDir.path + "/pack-builder/jar/pack-builder-1.0.jar"
     String coreDataPath = rootProject.projectDir.path + "/core/data"
     String assetsPath = rootProject.projectDir.path + "/android/assets"
@@ -11,9 +11,9 @@ task runJar(dependsOn: jar) {
         main = "-jar";
         args = [
                 jarPath,
-                coreDataPath,
-                assetsPath
+                "-i ../../core/data",
+                "-o ../../android/assets"
         ]
     }
-}
+}*/
 eclipse.project.name = appName + "-core"

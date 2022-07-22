@@ -1,5 +1,8 @@
 package com.jvmfrog.packbuilder;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.converters.FileConverter;
 import com.intbyte.bdb.DataBuffer;
 import com.intbyte.bdb.provider.HashKeyProvider;
 import com.jvmfrog.packbuilder.parser.DataSection;
@@ -10,6 +13,7 @@ import com.jvmfrog.packbuilder.parser.Section;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,9 +21,23 @@ import java.util.HashMap;
 import java.util.stream.Stream;
 
 public class Main {
+    @Parameter(names = {"-i", "-input"}, description = "Pack directory", converter = FileConverter.class)
+    public File packDir;
+    @Parameter(names = {"-o", "-output"}, description = "Output pack directory", converter = FileConverter.class)
+    public File outputDir;
+
     public static void main(String[] args) {
-        File mapsFolder = new File(args[0], "maps");
-        File assetsMapsFolder = new File(args[1], "maps");
+        Main main = new Main();
+        JCommander.newBuilder()
+                .addObject(main)
+                .build()
+                .parse(args);
+        main.build();
+    }
+
+    public void build(){
+        File mapsFolder = new File(packDir, "maps");
+        File assetsMapsFolder = new File(outputDir, "maps");
 
         File[] maps = mapsFolder.listFiles();
         assert maps != null;
