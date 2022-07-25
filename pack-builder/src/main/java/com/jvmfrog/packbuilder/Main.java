@@ -13,7 +13,6 @@ import com.jvmfrog.packbuilder.parser.Section;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,21 +20,30 @@ import java.util.HashMap;
 import java.util.stream.Stream;
 
 public class Main {
-    @Parameter(names = {"-i", "-input"}, description = "Pack directory", converter = FileConverter.class)
+    @Parameter(names = {"-i", "-input"}, description = "Pack directory path", converter = FileConverter.class)
     public File packDir;
-    @Parameter(names = {"-o", "-output"}, description = "Output pack directory", converter = FileConverter.class)
+    @Parameter(names = {"-o", "-output"}, description = "Output pack directory path", converter = FileConverter.class)
     public File outputDir;
+    @Parameter(names = "-help", help = true, description = "Help")
+    private boolean help;
 
     public static void main(String[] args) {
         Main main = new Main();
-        JCommander.newBuilder()
+        JCommander jCommander = JCommander.newBuilder()
                 .addObject(main)
-                .build()
-                .parse(args);
+                .build();
+        jCommander.parse(args);
+
+        if (main.help) {
+            jCommander.usage();
+            return;
+        }
+
         main.build();
+
     }
 
-    public void build(){
+    public void build() {
         File mapsFolder = new File(packDir, "maps");
         File assetsMapsFolder = new File(outputDir, "maps");
 
