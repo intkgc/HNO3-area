@@ -14,7 +14,7 @@ public class MapParser {
 
         for (String value : lines) {
             String line = value.trim();
-            if (line.startsWith("#")) continue;
+            if (line.startsWith(";")) continue;
             if (line.startsWith(".")) {
                 String name = line.substring(1);
                 section = getSection(name);
