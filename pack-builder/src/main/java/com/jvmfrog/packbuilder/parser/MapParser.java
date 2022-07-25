@@ -20,7 +20,7 @@ public class MapParser {
                 parameters = new LinkedList<>();
                 section.sectionData = parameters;
             } else {
-                if (parameters != null) {
+                if (parameters != null && !line.isEmpty()) {
                     parameters.add(new Parameter(line.replaceFirst("\\W+", "")));
                 }
             }
@@ -37,6 +37,8 @@ public class MapParser {
                 return new DataSection();
             case "map":
                 return new MapSection();
+            case "id":
+                return new IDSection();
         }
         return null;
     }

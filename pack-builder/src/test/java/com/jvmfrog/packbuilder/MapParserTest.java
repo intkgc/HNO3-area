@@ -1,9 +1,6 @@
 package com.jvmfrog.packbuilder;
 
-import com.jvmfrog.packbuilder.parser.DataSection;
-import com.jvmfrog.packbuilder.parser.MapParser;
-import com.jvmfrog.packbuilder.parser.MapSection;
-import com.jvmfrog.packbuilder.parser.Section;
+import com.jvmfrog.packbuilder.parser.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -16,6 +13,9 @@ public class MapParserTest {
             ".data\n" +
             "    width 3\n" +
             "    height 3\n" +
+            "\n" +
+            ".id\n" +
+            "    block 1\n" +
             "\n" +
             ".map\n" +
             "    2 2 2\n" +
@@ -34,11 +34,12 @@ public class MapParserTest {
 
         DataSection data = (DataSection) sections.get("data");
         MapSection map = (MapSection) sections.get("map");
-
+        IDSection ids = (IDSection) sections.get("id");
         assertEquals(3, data.width);
         assertEquals(3, data.height);
         for (int i = 0; i < 3; i++) {
             assertArrayEquals(this.map[i], map.map[i]);
         }
+        assertEquals(ids.ids.get("block"), 1);
     }
 }
