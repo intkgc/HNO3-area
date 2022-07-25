@@ -12,16 +12,20 @@ public class MapParser {
         LinkedList<Parameter> parameters = null;
         Section section = null;
 
-        for (String line : lines) {
+        for (String value : lines) {
+            String line = value.trim();
+            if (line.startsWith("#")) continue;
             if (line.startsWith(".")) {
                 String name = line.substring(1);
                 section = getSection(name);
-                sections.put(name, section);
-                parameters = new LinkedList<>();
-                section.sectionData = parameters;
+                if (section != null) {
+                    sections.put(name, section);
+                    parameters = new LinkedList<>();
+                    section.sectionData = parameters;
+                }
             } else {
                 if (parameters != null && !line.isEmpty()) {
-                    parameters.add(new Parameter(line.replaceFirst("\\W+", "")));
+                    parameters.add(new Parameter(line));
                 }
             }
         }

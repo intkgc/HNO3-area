@@ -16,7 +16,7 @@ public class MapParserTest {
             "\n" +
             ".id\n" +
             "    block 1\n" +
-            "\n" +
+            "#Comment\n" +
             ".map\n" +
             "    2 2 2\n" +
             "    1 2 1\n" +
