@@ -40,6 +40,6 @@ public class MapParserTest {
         for (int i = 0; i < 3; i++) {
             assertArrayEquals(this.map[i], map.map[i]);
         }
-        assertEquals(ids.ids.get("block"), 1);
+        assertEquals(ids.ids.get(1), "block");
     }
 }
