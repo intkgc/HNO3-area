@@ -9,6 +9,7 @@ import com.jvmfrog.packbuilder.parser.DataSection;
 import com.jvmfrog.packbuilder.parser.MapParser;
 import com.jvmfrog.packbuilder.parser.MapSection;
 import com.jvmfrog.packbuilder.parser.Section;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,26 +39,39 @@ public class Main {
             jCommander.usage();
             return;
         }
-
         main.build();
-
     }
 
     public void build() {
         File mapsFolder = new File(packDir, "maps");
         File assetsMapsFolder = new File(outputDir, "maps");
 
+        createPackDirectories(outputDir);
+
+        System.out.println("[Pack Builder] Input directory size: " + FileUtils.sizeOfDirectory(packDir) + " Byte");
+
         File[] maps = mapsFolder.listFiles();
         assert maps != null;
         for (File file : maps) {
             if (file.getName().endsWith(".map")) {
-                translateMapToBDB(file, new File(assetsMapsFolder, file.getName() + ".bdb"));
+                try {
+                    translateMapToBDB(file, new File(assetsMapsFolder, file.getName() + ".bdb"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        System.out.println("[Pack Builder] Output directory size: " + FileUtils.sizeOfDirectory(outputDir) + " Byte");
     }
 
-    private static void translateMapToBDB(File file, File outputFile) {
-        HashMap<String, Section> sections = MapParser.parse(readFile(file));
+    private static void createPackDirectories(File packDir) {
+        new File(packDir, "maps").mkdir();
+        new File(packDir, "blocks").mkdir();
+        new File(packDir, "entities").mkdir();
+    }
+
+    private static void translateMapToBDB(File file, File outputFile) throws IOException {
+        HashMap<String, Section> sections = MapParser.parse(FileUtils.readFileToString(file, StandardCharsets.UTF_8));
 
         DataSection data = (DataSection) sections.get("data");
         MapSection map = (MapSection) sections.get("map");
@@ -69,27 +83,6 @@ public class Main {
         for (int i = 0; i < map.map.length; i++) {
             buffer.put("layer-" + i, map.map[i]);
         }
-        writeBytesToFile(outputFile, buffer.toBytes());
-    }
-
-    private static String readFile(File file) {
-        StringBuilder contentBuilder = new StringBuilder();
-
-        try (Stream<String> stream
-                     = Files.lines(Paths.get(file.getPath()), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s).append("\n"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return contentBuilder.toString();
-    }
-
-    private static void writeBytesToFile(File file, byte[] bytes) {
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
-            outputStream.write(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileUtils.writeByteArrayToFile(outputFile, buffer.toBytes(), false);
     }
 }

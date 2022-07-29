@@ -40,6 +40,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'com.github.JVMFrog:bdb5-remake:1.1.1.beta'
     implementation 'com.beust:jcommander:1.82'
+    implementation 'commons-io:commons-io:2.11.0'
 }
 
 test {
