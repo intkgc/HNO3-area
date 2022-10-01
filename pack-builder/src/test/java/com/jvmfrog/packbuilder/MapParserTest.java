@@ -22,11 +22,8 @@ public class MapParserTest {
             "    1 2 1\n" +
             "    1 1 1";
 
-    byte[][] map = new byte[][]{
-            {2, 2, 2},
-            {1, 2, 1},
-            {1, 1, 1}
-    };
+    byte[] map = new byte[]
+            {2, 2, 2, 1, 2, 1, 1, 1, 1};
 
     @Test
     public void test() {
@@ -38,7 +35,7 @@ public class MapParserTest {
         assertEquals(3, data.width);
         assertEquals(3, data.height);
         for (int i = 0; i < 3; i++) {
-            assertArrayEquals(this.map[i], map.map[i]);
+            assertEquals(this.map[i], map.map[i]);
         }
         assertEquals(ids.ids.get(1), "block");
     }

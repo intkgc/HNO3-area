@@ -10,7 +10,7 @@ public class MapSection extends Section {
         map = new byte[width * height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                map[x * width + y] = Byte.parseByte(sectionData.get(y).data[x]);
+                map[y * height + x] = Byte.parseByte(sectionData.get(y).data[x]);
             }
         }
     }
