@@ -12,13 +12,9 @@ import com.jvmfrog.packbuilder.parser.Section;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.stream.Stream;
 
 public class Main {
     @Parameter(names = {"-i", "-input"}, description = "Pack directory path", converter = FileConverter.class)
@@ -79,10 +75,7 @@ public class Main {
         DataBuffer buffer = new DataBuffer(new HashKeyProvider());
         buffer.put("width", data.width);
         buffer.put("height", data.height);
-        buffer.put("layersCount", map.map.length);
-        for (int i = 0; i < map.map.length; i++) {
-            buffer.put("layer-" + i, map.map[i]);
-        }
+        buffer.put("map", map.map);
         FileUtils.writeByteArrayToFile(outputFile, buffer.toBytes(), false);
     }
 }
